@@ -2,49 +2,256 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}} | Vision+</title>
+    <!--
+    ╔══════════════════════════════════════════════════════════════╗
+    ║  КАК СОЗДАТЬ НОВУЮ СТРАНИЦУ ВИДЕО:                          ║
+    ║                                                              ║
+    ║  1. Скопируй этот файл в папку videos/                      ║
+    ║     Например: videos/video11.html                           ║
+    ║                                                              ║
+    ║  2. Замени все значения в разделе «НАСТРОЙ ЭТИ ЗНАЧЕНИЯ»    ║
+    ║                                                              ║
+    ║  3. Готово! Не трогай шапку и подвал — они одинаковые.      ║
+    ╚══════════════════════════════════════════════════════════════╝
+    -->
+
+    <!-- ══ НАСТРОЙ ЭТИ ЗНАЧЕНИЯ ══════════════════════════════ -->
+    <!-- Заголовок вкладки браузера -->
+    <title>НАЗВАНИЕ ВИДЕО — Vision+</title>
+    <!-- ════════════════════════════════════════════════════════ -->
+
+    <!-- CSS лежит в корне, страница лежит в videos/ — путь ../style.css -->
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <header class="header">
-        <nav class="nav">
-            <ul class="nav__list">
-                <li><a href="../index.html" class="nav__link">Главная</a></li>
-                <li><a href="../index.html#videos" class="nav__link">Видео</a></li>
-                <li><a href="../index.html#upload" class="nav__link">Загрузить</a></li>
-            </ul>
-        </nav>
-        <button id="loginBtn" class="header__login-btn">Войти</button>
-    </header>
-    <main>
-        <h1 class="main-title">{{title}}</h1>
-        <div style="display:flex;justify-content:center;align-items:center;margin:32px 0;">
-            <video src="{{videoSrc}}" controls width="640" poster="{{poster}}" style="border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);"></video>
+
+<!-- ═══════════════════════════════════════════════════
+     ШАПКА — не меняй, одинакова на всех страницах
+     ═══════════════════════════════════════════════════ -->
+<div class="topbar">
+    <a href="../index.html" class="logo">
+        <span class="logo-you">Vision</span><span class="logo-tube">+</span>
+        <span class="logo-tagline">Смотри сам!</span>
+    </a>
+    <div class="topbar-right">
+        <a href="#">Войти</a> |
+        <a href="#">Регистрация</a> |
+        <a href="#">История</a> |
+        <a href="#">Помощь</a>
+    </div>
+</div>
+
+<div class="searchbar">
+    <input type="text" placeholder="Поиск видео...">
+    <select>
+        <option>Видео</option>
+        <option>Авторы</option>
+    </select>
+    <input type="submit" class="btn-search" value="Найти">
+    <a href="#" style="font-size:11px;">расширенный</a>
+    <button class="btn-upload">Загрузить</button>
+</div>
+
+<!-- Убери класс active с Главная, добавь к нужному табу -->
+<div class="mainnav">
+    <a href="../index.html">Главная</a>
+    <a href="#" class="active">Видео</a>
+    <a href="#">Каналы</a>
+    <a href="#">Категории</a>
+    <a href="#">Загрузить</a>
+</div>
+
+<div class="subnav">
+    <a href="#">Мои видео</a> |
+    <a href="#">Избранное</a> |
+    <a href="#">Друзья</a> |
+    <a href="#">Сообщения</a> |
+    <a href="#">Мои подписки</a> |
+    <a href="#">Плейлисты</a> |
+    <a href="#">Мой профиль</a>
+</div>
+<!-- КОНЕЦ ШАПКИ ════════════════════════════════════ -->
+
+
+<div class="page">
+
+    <!-- ─── ЦЕНТРАЛЬНАЯ КОЛОНКА (плеер + инфо) ─── -->
+    <div class="main">
+
+        <!-- ══ НАСТРОЙ: заголовок видео ══ -->
+        <div class="video-title-h">НАЗВАНИЕ ВИДЕО</div>
+
+        <!-- Плеер -->
+        <div class="player-wrap">
+            <!-- ══ НАСТРОЙ: src — путь к видеофайлу, poster — превью-картинка ══ -->
+            <video src="../assets/video.mp4" controls poster="../assets/preview.jpg"></video>
         </div>
-        <div style="max-width:640px;margin:0 auto 32px auto;background:#fff;padding:24px 18px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
-            <p style="font-size:17px;color:#444;margin-bottom:18px;">{{description}}</p>
-            <form style="margin-bottom:18px;">
-                <label style="font-weight:600;">Оцените видео:</label><br>
-                <span style="font-size:22px;">
-                    <input type="radio" name="rating" id="star5" value="5">
-                    <label for="star5">★</label>
-                    <input type="radio" name="rating" id="star4" value="4">
-                    <label for="star4">★</label>
-                    <input type="radio" name="rating" id="star3" value="3">
-                    <label for="star3">★</label>
-                    <input type="radio" name="rating" id="star2" value="2">
-                    <label for="star2">★</label>
-                    <input type="radio" name="rating" id="star1" value="1">
-                    <label for="star1">★</label>
-                </span>
-            </form>
-            <form>
-                <label for="comment" style="font-weight:600;">Комментарий:</label><br>
-                <textarea id="comment" name="comment" rows="3" cols="40" placeholder="Ваш комментарий..." style="width:100%;border-radius:6px;border:1px solid #e0e0e0;padding:8px;margin-bottom:8px;"></textarea><br>
-                <button type="submit" class="search-form__button">Отправить</button>
-            </form>
+        <div class="watch-quality"><a href="#">смотреть в высоком качестве</a></div>
+
+        <!-- Оценки и просмотры -->
+        <div class="watch-meta">
+            <div class="rate-block">
+                <span style="font-weight:bold;">Оценка:</span>
+                <!-- ══ НАСТРОЙ: звёзды и количество оценок ══ -->
+                <span class="stars-big">★★★★★</span>
+                <span style="font-size:11px; color:#666;"> 752 оценки</span>
+            </div>
+            <!-- ══ НАСТРОЙ: количество просмотров ══ -->
+            <div class="views-big">Просмотров: 327 463 <span>с момента публикации</span></div>
         </div>
-    </main>
+
+        <!-- Кнопки действий -->
+        <div class="watch-actions">
+            <a href="#">&#10084; В избранное</a>
+            <a href="#">&#8680; Поделиться</a>
+            <a href="#">&#9776; В плейлист</a>
+            <a href="#">&#9873; Пожаловаться</a>
+        </div>
+
+        <!-- Информация об авторе -->
+        <div class="info-box">
+            <!-- ══ НАСТРОЙ: первая буква названия канала ══ -->
+            <div class="channel-ava bg1">V</div>
+            <div class="info-right">
+                <button class="btn-sub">Подписаться</button>
+                <!-- ══ НАСТРОЙ: имя автора и дата ══ -->
+                <div class="info-from">От: <a href="#">Имя автора</a></div>
+                <div class="info-added">Добавлено: 1 марта 2026 (<a href="#">подробнее</a>)</div>
+                <!-- ══ НАСТРОЙ: описание видео ══ -->
+                <div class="info-desc">
+                    Здесь описание видео. Расскажи о чём оно, что зритель узнает,
+                    какие темы затронуты. Можно несколько предложений.
+                </div>
+            </div>
+        </div>
+
+        <!-- Ссылка и код для вставки -->
+        <div class="share-row">
+            <table>
+                <tr>
+                    <td>URL</td>
+                    <!-- ══ НАСТРОЙ: полный URL страницы ══ -->
+                    <td><input type="text" value="https://visionplus.ru/videos/video11.html" readonly></td>
+                </tr>
+                <tr>
+                    <td>Embed</td>
+                    <td><input type="text" value='&lt;iframe src="https://visionplus.ru/embed/video11" width="640" height="360"&gt;&lt;/iframe&gt;' readonly></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Ещё видео от этого автора -->
+        <div class="more-from">
+            <div class="more-title">Ещё от этого автора</div>
+
+            <!-- ══ НАСТРОЙ: замени на реальные ссылки и данные ══ -->
+            <!-- БЛОК «ЕЩЁ ВИДЕО»: скопируй .more-item и измени данные -->
+            <div class="more-item">
+                <div class="more-thumb">
+                    <div class="more-thumb-bg bg3"></div>
+                    <span class="duration">8:55</span>
+                </div>
+                <div class="more-info">
+                    <a href="video3.html" class="title">Гаджеты будущего: обзор</a>
+                    <div class="meta">От: TechReview</div>
+                    <div class="meta">Просмотров: 21 700</div>
+                </div>
+            </div>
+
+            <div class="more-item">
+                <div class="more-thumb">
+                    <div class="more-thumb-bg bg6"></div>
+                    <span class="duration">9:45</span>
+                </div>
+                <div class="more-info">
+                    <a href="video6.html" class="title">Как снять крутое видео</a>
+                    <div class="meta">От: FilmPro</div>
+                    <div class="meta">Просмотров: 15 800</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Комментарии -->
+        <div class="comments">
+            <div class="comments-title">Комментарии</div>
+            <div class="comment-form">
+                <textarea rows="3" placeholder="Оставить комментарий..."></textarea><br>
+                <input type="submit" class="btn-default" value="Отправить" style="margin-top:5px;">
+            </div>
+        </div>
+
+        <div style="margin-top:10px; font-size:12px;">
+            <a href="../index.html">&laquo; Назад к списку видео</a>
+        </div>
+
+    </div>
+    <!-- /ЦЕНТРАЛЬНАЯ КОЛОНКА -->
+
+
+    <!-- ─── ПРАВЫЙ САЙДБАР (похожие видео) ─── -->
+    <div class="watch-sidebar">
+
+        <div class="sb-block">
+            <div class="sb-title">Похожие видео</div>
+
+            <!-- ПОХОЖЕЕ ВИДЕО: скопируй .related-thumb и измени данные -->
+            <div class="related-thumb">
+                <!-- ══ НАСТРОЙ: класс bg1..bg10, href, длительность ══ -->
+                <a href="video5.html" class="rel-img bg5">
+                    <span class="duration">22:10</span>
+                </a>
+                <a href="video5.html" class="title">Первые шаги в программировании</a>
+                <div class="meta">От: DevStart &nbsp;|&nbsp; 34 200 просм.</div>
+            </div>
+
+            <div class="related-thumb">
+                <a href="video7.html" class="rel-img bg7">
+                    <span class="duration">7:18</span>
+                </a>
+                <a href="video7.html" class="title">Секреты монтажа для новичков</a>
+                <div class="meta">От: EditMaster &nbsp;|&nbsp; 8 900 просм.</div>
+            </div>
+
+            <div class="related-thumb">
+                <a href="video2.html" class="rel-img bg2">
+                    <span class="duration">12:18</span>
+                </a>
+                <a href="video2.html" class="title">Фильмы, которые изменили мир</a>
+                <div class="meta">От: CinemaWorld &nbsp;|&nbsp; 9 100 просм.</div>
+            </div>
+
+            <div class="related-thumb">
+                <a href="video4.html" class="rel-img bg4">
+                    <span class="duration">15:04</span>
+                </a>
+                <a href="video4.html" class="title">Путешествие по Европе: лучшие места</a>
+                <div class="meta">От: EuroTravel &nbsp;|&nbsp; 7 300 просм.</div>
+            </div>
+
+            <!-- Добавь ещё .related-thumb блоки по необходимости -->
+
+        </div>
+
+    </div>
+    <!-- /ПРАВЫЙ САЙДБАР -->
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     ПОДВАЛ — не меняй, одинаков на всех страницах
+     ═══════════════════════════════════════════════════ -->
+<footer>
+    <a href="#">О проекте</a>
+    <a href="#">Блог</a>
+    <a href="#">Реклама</a>
+    <a href="#">Разработчикам</a>
+    <a href="#">Помощь</a>
+    <a href="#">Контакты</a>
+    <br><br>
+    &copy; 2026 Vision+ &nbsp;|&nbsp; Все права защищены
+</footer>
+
 </body>
 </html>

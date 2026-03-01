@@ -2,37 +2,195 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лучшие фильмы 2025 года | Vision+</title>
+    <title>Vision+</title>
+    <link rel="stylesheet" href="/my-website-Nosonov-Daniil/assets/style.css">
 </head>
 <body>
-    <main>
-        <h1>Лучшие фильмы 2025 года</h1>
-        <video src="/assets/video2.mp4" controls width="100%"></video>
-        <p>Описание: Подборка лучших фильмов 2025 года.</p>
-        <section style="margin:32px 0;">
-            <form>
-                <label>Оцените видео:</label><br>
-                <span>
-                    <input type="radio" name="rating" id="star5" value="5">
-                    <label for="star5">★</label>
-                    <input type="radio" name="rating" id="star4" value="4">
-                    <label for="star4">★</label>
-                    <input type="radio" name="rating" id="star3" value="3">
-                    <label for="star3">★</label>
-                    <input type="radio" name="rating" id="star2" value="2">
-                    <label for="star2">★</label>
-                    <input type="radio" name="rating" id="star1" value="1">
-                    <label for="star1">★</label>
-                </span>
-            </form>
-            <form style="margin-top:18px;">
-                <label for="comment">Комментарий:</label><br>
-                <textarea id="comment" name="comment" rows="3" cols="40" placeholder="Ваш комментарий..."></textarea><br>
-                <button type="submit">Отправить</button>
-            </form>
-        </section>
-        <a href="../index.html">Назад</a>
-    </main>
+
+<!-- ШАПКА -->
+<div class="topbar">
+    <a href="../index.html" class="logo">
+        <span class="logo-you">Vision</span><span class="logo-tube">+</span>
+        <span class="logo-tagline">Смотри сам!</span>
+    </a>
+    <div class="topbar-right">
+        <a href="#">Войти</a> |
+        <a href="#">Регистрация</a> |
+        <a href="#">Помощь</a>
+    </div>
+</div>
+
+<div class="searchbar">
+    <input type="text" placeholder="Поиск видео...">
+    <select><option>Видео</option> 
+            <option>Авторы</option>
+    </select>
+    <input type="submit" class="btn-search" value="Найти">
+    <button class="btn-upload">Загрузить</button>
+</div>
+
+<div class="mainnav">
+    <a href="../index.html">Главная</a>
+    <a href="#" class="active">Видео</a>
+    <a href="#">Каналы</a>
+    <a href="#">Категории</a>
+    <a href="#">Загрузить</a>
+</div>
+
+<div class="subnav">
+    <a href="#">Мои видео</a> |
+    <a href="#">Плейлисты</a> |
+    <a href="#">Мой профиль</a>
+</div>
+
+<div class="page">
+    <div class="main" id="watch-main">
+        <p style="color:#666;padding:20px 0;">Загрузка...</p>
+    </div>
+    <div class="watch-sidebar">
+        <div class="sb-block">
+            <div class="sb-title">Похожие видео</div>
+            <div id="related-list"></div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <a href="#">О проекте</a>
+    <a href="./other/contact.html" class="active">Контакты</a>
+    <br><br>
+    &copy; 2026 Vision+ &nbsp;|&nbsp; Все права защищены
+</footer>
+
+<script src="/my-website-Nosonov-Daniil/assets/videos.js"></script>
+<script>
+
+// Берём id из имени файла: video1.html → "video1"
+const pageId = location.pathname.split('/').pop().replace('.html', '');
+const v = VIDEOS.find(x => x.id === pageId);
+
+if (!v) {
+    document.getElementById('watch-main').innerHTML =
+        '<p style="color:red;padding:20px;">Видео не найдено. <a href="../index.html">На главную</a></p>';
+} else {
+
+    document.title = v.title + ' — Vision+';
+
+    function starsHTML(n) {
+        return `<span class="stars">${'★'.repeat(n)}</span>`
+             + `<span class="stars-grey">${'★'.repeat(5 - n)}</span>`;
+    }
+
+    // Превью: путь берём прямо из videos.js — без изменений
+    function previewThumb(video) {
+        if (video.preview) {
+            return `<img src="${video.preview}" alt="${video.title}">`;
+        }
+        return ''; // цветной фон через CSS-класс bg1..bg10
+    }
+
+    // Плеер: путь берём прямо из videos.js — без изменений
+    function playerHTML(video) {
+        if (video.video) {
+            const poster = video.preview ? `poster="${video.preview}"` : '';
+            return `<video src="${video.video}" controls ${poster}></video>`;
+        }
+        return `<div style="background:#111;width:100%;height:320px;display:flex;
+                            align-items:center;justify-content:center;
+                            color:#666;font-size:13px;">
+                    Видеофайл не указан — добавь поле video в videos.js
+                </div>`;
+    }
+
+    document.getElementById('watch-main').innerHTML = `
+
+        <div class="video-title-h">${v.title}</div>
+
+        <div class="player-wrap">
+            ${playerHTML(v)}
+        </div>
+        <div class="watch-quality"><a href="#">смотреть в высоком качестве</a></div>
+
+        <div class="watch-meta">
+            <div class="rate-block">
+                <b>Оценка:</b>
+                ${starsHTML(v.rating)}
+                <span style="font-size:11px;color:#666;"> ${v.ratings} оценок</span>
+            </div>
+            <div class="views-big">
+                Просмотров: ${v.views}
+                <span>с момента публикации</span>
+            </div>
+        </div>
+
+        <div class="watch-actions">
+            <a href="#">&#10084; В избранное</a>
+            <a href="#">&#8680; Поделиться</a>
+            <a href="#">&#9776; В плейлист</a>
+            <a href="#">&#9873; Пожаловаться</a>
+        </div>
+
+        <div class="info-box">
+            <div class="channel-ava ${v.bg}" style="color:#fff;font-size:18px;font-weight:bold;">
+                ${v.author[0]}
+            </div>
+            <div class="info-right">
+                <button class="btn-sub">Подписаться</button>
+                <div class="info-from">От: <a href="#">${v.author}</a></div>
+                <div class="info-added">
+                    Добавлено: ${v.added}
+                    &nbsp; Категория: <a href="#">${v.category}</a>
+                </div>
+                <div class="info-desc">${v.description}</div>
+                <div style="margin-top:6px;font-size:11px;color:#666;">
+                    Теги: ${v.tags.map(t => `<a href="#" style="color:#0033cc;">${t}</a>`).join(' ')}
+                </div>
+            </div>
+        </div>
+
+        <div class="share-row">
+            <table>
+                <tr>
+                    <td>URL</td>
+                    <td><input type="text" value="${location.href}" readonly></td>
+                </tr>
+                <tr>
+                    <td>Embed</td>
+                    <td><input type="text" value='&lt;iframe src="https://visionplus.ru/embed/${v.id}" width="640" height="360"&gt;&lt;/iframe&gt;' readonly></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="comments" style="margin-top:16px;">
+            <div class="comments-title">Комментарии</div>
+            <div class="comment-form">
+                <textarea rows="3" placeholder="Оставить комментарий..."></textarea><br>
+                <input type="submit" class="btn-default" value="Отправить" style="margin-top:5px;">
+            </div>
+        </div>
+
+        <div style="margin-top:12px;font-size:12px;">
+            <a href="../index.html">&laquo; Назад к списку видео</a>
+        </div>
+    `;
+
+    // Похожие видео — пути тоже берём из videos.js как есть
+    const relVideos = (v.related || [])
+        .map(id => VIDEOS.find(x => x.id === id))
+        .filter(Boolean);
+
+    document.getElementById('related-list').innerHTML = relVideos.map(r => `
+        <div class="related-thumb">
+            <a href="${r.id}.html" class="rel-img ${r.bg}">
+                ${r.preview ? `<img src="${r.preview}" alt="${r.title}" style="width:100%;height:100%;object-fit:cover;">` : ''}
+                <span class="duration">${r.duration}</span>
+            </a>
+            <a href="${r.id}.html" class="title">${r.title}</a>
+            <div class="meta">От: ${r.author} &nbsp;|&nbsp; ${r.views} просм.</div>
+        </div>
+    `).join('');
+}
+
+</script>
 </body>
 </html>
