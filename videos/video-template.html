@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} | Vision+</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <ul class="nav__list">
+                <li><a href="../index.html" class="nav__link">Главная</a></li>
+                <li><a href="../index.html#videos" class="nav__link">Видео</a></li>
+                <li><a href="../index.html#upload" class="nav__link">Загрузить</a></li>
+            </ul>
+        </nav>
+        <button id="loginBtn" class="header__login-btn">Войти</button>
+    </header>
+    <main>
+        <h1 class="main-title">{{title}}</h1>
+        <div style="display:flex;justify-content:center;align-items:center;margin:32px 0;">
+            <video src="{{videoSrc}}" controls width="640" poster="{{poster}}" style="border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);"></video>
+        </div>
+        <div style="max-width:640px;margin:0 auto 32px auto;background:#fff;padding:24px 18px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+            <p style="font-size:17px;color:#444;margin-bottom:18px;">{{description}}</p>
+            <form style="margin-bottom:18px;">
+                <label style="font-weight:600;">Оцените видео:</label><br>
+                <span style="font-size:22px;">
+                    <input type="radio" name="rating" id="star5" value="5">
+                    <label for="star5">★</label>
+                    <input type="radio" name="rating" id="star4" value="4">
+                    <label for="star4">★</label>
+                    <input type="radio" name="rating" id="star3" value="3">
+                    <label for="star3">★</label>
+                    <input type="radio" name="rating" id="star2" value="2">
+                    <label for="star2">★</label>
+                    <input type="radio" name="rating" id="star1" value="1">
+                    <label for="star1">★</label>
+                </span>
+            </form>
+            <form>
+                <label for="comment" style="font-weight:600;">Комментарий:</label><br>
+                <textarea id="comment" name="comment" rows="3" cols="40" placeholder="Ваш комментарий..." style="width:100%;border-radius:6px;border:1px solid #e0e0e0;padding:8px;margin-bottom:8px;"></textarea><br>
+                <button type="submit" class="search-form__button">Отправить</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

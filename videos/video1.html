@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Топ-5 лайфхаков для сайта | Vision+</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <ul class="nav__list">
+                <li><a href="../index.html" class="nav__link">Главная</a></li>
+                <li><a href="../index.html#videos" class="nav__link">Видео</a></li>
+                <li><a href="../index.html#upload" class="nav__link">Загрузить</a></li>
+            </ul>
+        </nav>
+        <button id="loginBtn" class="header__login-btn">Войти</button>
+    </header>
+    <main>
+        <h1 class="main-title">Топ-5 лайфхаков для сайта</h1>
+        <div style="display:flex;justify-content:center;align-items:center;margin:32px 0;">
+            <video src="/assets/video1.mp4" controls width="640" poster="https://i.imgur.com/1.jpg" style="border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);"></video>
+        </div>
+        <div style="max-width:640px;margin:0 auto 32px auto;background:#fff;padding:24px 18px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+            <p style="font-size:17px;color:#444;margin-bottom:18px;">Описание: Краткое руководство по созданию сайта за 1 час. Узнайте, как быстро и просто запустить свой проект!</p>
+            <form style="margin-bottom:18px;">
+                <label style="font-weight:600;">Оцените видео:</label><br>
+                <span style="font-size:22px;">
+                    <input type="radio" name="rating" id="star5" value="5">
+                    <label for="star5">★</label>
+                    <input type="radio" name="rating" id="star4" value="4">
+                    <label for="star4">★</label>
+                    <input type="radio" name="rating" id="star3" value="3">
+                    <label for="star3">★</label>
+                    <input type="radio" name="rating" id="star2" value="2">
+                    <label for="star2">★</label>
+                    <input type="radio" name="rating" id="star1" value="1">
+                    <label for="star1">★</label>
+                </span>
+            </form>
+            <form>
+                <label for="comment" style="font-weight:600;">Комментарий:</label><br>
+                <textarea id="comment" name="comment" rows="3" cols="40" placeholder="Ваш комментарий..." style="width:100%;border-radius:6px;border:1px solid #e0e0e0;padding:8px;margin-bottom:8px;"></textarea><br>
+                <button type="submit" class="search-form__button">Отправить</button>
+            </form>
+        </div>
+        </section>
+        <a href="../index.html">Назад</a>
+    </main>
+    <div id="modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.3); justify-content:center; align-items:center;">
+        <div style="background:#fff; padding:32px 24px; border-radius:10px; min-width:280px; max-width:90vw;">
+            <h2>Вход или регистрация</h2>
+            <form>
+                <input type="text" placeholder="Логин" style="width:100%;margin-bottom:12px;">
+                <input type="password" placeholder="Пароль" style="width:100%;margin-bottom:12px;">
+                <button type="submit" style="width:100%;margin-bottom:8px;">Войти</button>
+            </form>
+            <button id="closeModal" style="width:100%;margin-top:8px;">Закрыть</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('loginBtn').onclick = function() {
+            document.getElementById('modal').style.display = 'flex';
+        };
+        document.getElementById('closeModal').onclick = function() {
+            document.getElementById('modal').style.display = 'none';
+        };
+    </script>
+    </main>
+</body>
+</html>
